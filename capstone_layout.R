@@ -117,13 +117,13 @@ body <-
     tabItem(
       tabName = "dashboard1",
       fluidRow(
-        column(width = 8, withSpinner(
+        column(width = 8, shinycssloaders::withSpinner(
           plotlyOutput("trend_line", height = "290px")
         )),
         column(
           width = 4,
           h4("What's Trending", style = "text-align: center;"),
-          withSpinner(dataTableOutput("trending", height = "290px"))
+          shinycssloaders::withSpinner(dataTableOutput("trending", height = "290px"))
         )
       ),
       fluidRow(
@@ -144,12 +144,12 @@ body <-
             selected = 'Functionality',
             inline = T
           ),
-          withSpinner(plotOutput("feature_pie", height = "240px"))
+          shinycssloaders::withSpinner(plotOutput("feature_pie", height = "240px"))
         ),
         column(
           width = 8,
           h4("Materials", style = "text-align: center;"),
-          withSpinner(plotlyOutput("material_bar", height = "290px"))
+          shinycssloaders::withSpinner(plotlyOutput("material_bar", height = "290px"))
         )
       )
     ),
@@ -157,7 +157,7 @@ body <-
             fluidRow(column(
               width = 8,
               h4("Materials", style = "text-align: center;"),
-              withSpinner(plotlyOutput("brand_trend", height = "310px"))
+              shinycssloaders::withSpinner(plotlyOutput("brand_trend", height = "310px"))
             ))),
     tabItem(tabName = "dashboard3",
             fluidRow(
@@ -176,7 +176,7 @@ body <-
             br(),
             fluidRow(column(
               width = 12,
-              withSpinner(
+              shinycssloaders::withSpinner(
                 leafletOutput("trade_map", height = "300px"),
                 type = 6,
                 size = 0.6
