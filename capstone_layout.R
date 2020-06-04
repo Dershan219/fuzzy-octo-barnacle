@@ -1,4 +1,4 @@
-Sys.setlocale(category = "LC_ALL", locale = "cht")
+library(shinycssloaders)
 
 header <- dashboardHeader(
   title = "Textile Trends",
@@ -118,12 +118,12 @@ body <-
       tabName = "dashboard1",
       fluidRow(
         column(width = 8, shinycssloaders::withSpinner(
-          plotlyOutput("trend_line", height = "280px")
+          plotlyOutput("trend_line", height = "290px")
         )),
         column(
           width = 4,
           h4("What's Trending", style = "text-align: center;"),
-          shinycssloaders::withSpinner(dataTableOutput("trending", height = "280px"))
+          shinycssloaders::withSpinner(dataTableOutput("trending", height = "290px"))
         )
       ),
       fluidRow(
