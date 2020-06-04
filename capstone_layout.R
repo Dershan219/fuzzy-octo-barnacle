@@ -118,12 +118,12 @@ body <-
       tabName = "dashboard1",
       fluidRow(
         column(width = 8, shinycssloaders::withSpinner(
-          plotlyOutput("trend_line", height = "290px")
+          plotlyOutput("trend_line", height = "280px")
         )),
         column(
           width = 4,
           h4("What's Trending", style = "text-align: center;"),
-          shinycssloaders::withSpinner(dataTableOutput("trending", height = "290px"))
+          shinycssloaders::withSpinner(dataTableOutput("trending", height = "280px"))
         )
       ),
       fluidRow(
@@ -144,12 +144,12 @@ body <-
             selected = 'Functionality',
             inline = T
           ),
-          shinycssloaders::withSpinner(plotOutput("feature_pie", height = "240px"))
+          shinycssloaders::withSpinner(plotOutput("feature_pie", height = "230px"))
         ),
         column(
           width = 8,
           h4("Materials", style = "text-align: center;"),
-          shinycssloaders::withSpinner(plotlyOutput("material_bar", height = "290px"))
+          shinycssloaders::withSpinner(plotlyOutput("material_bar", height = "280px"))
         )
       )
     ),
