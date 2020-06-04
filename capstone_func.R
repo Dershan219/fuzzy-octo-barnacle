@@ -47,7 +47,7 @@ cat_materials_features <- function(df){
   return(df)
 }
 
-get_features <- function(df, dt_range){
+get_features <- function(df, dt_range, dict){
   features_df <- 
   if(dt_range == "Past 30 Days"){
     subset(df, (Listed_Date <= today())&(Listed_Date >= today()-30))
@@ -59,12 +59,12 @@ get_features <- function(df, dt_range){
     subset(df, (Listed_Date == year(today())))
   }
   features_df %>% separate_rows(Features, sep = ',') %>% subset(Features!="") %>% 
-    mutate(Features_cat = hash::values(h, Features)) %>% select(Features_cat) %>% 
+    mutate(Features_cat = hash::values(dict, Features)) %>% select(Features_cat) %>% 
     table(exclude = "") %>% as.data.frame() %>% arrange(-Freq) %>% 
     mutate(pct = Freq/sum(Freq), ymax = cumsum(pct), ymin = c(0, head(ymax, n=-1)))
 }
 
-materials_features <- function(df, dt_range, sel_features){
+materials_features <- function(df, dt_range, sel_features, dict){
   mf_df <- 
     if(dt_range == "Past 30 Days"){
       subset(df, (Listed_Date <= today())&(Listed_Date >= today()-30))
@@ -77,7 +77,7 @@ materials_features <- function(df, dt_range, sel_features){
     }
   mf_df %>% separate_rows(Materials, sep = ',') %>% 
     subset(Materials!="") %>% separate_rows(Features, sep = ',') %>% subset(Features!="") %>%
-    mutate(Features_cat = hash::values(h, Features)) %>% subset(Features_cat %in% sel_features) %>% 
+    mutate(Features_cat = hash::values(dict, Features)) %>% subset(Features_cat %in% sel_features) %>% 
     select(Materials) %>% table(exclude = "") %>% as.data.frame() %>% arrange(-Freq)
 }
 
