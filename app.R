@@ -58,14 +58,17 @@ hashmap[c("反光功能", "抗紫外線", "異味控制", "抗菌功能")] <- 'F
 hashmap[c("環保訴求")] <- 'Sustainable'
 hashmap[c("Athleisure", "3D列印", "數位印花", "超輕量")] <- 'Trends'
 
-source(
-  "https://raw.githubusercontent.com/Dershan219/textile-dashboard/master/capstone_layout.R",
-  local = F
-)
-source(
-  "https://raw.githubusercontent.com/Dershan219/textile-dashboard/master/capstone_func.R",
-  local = F
-)
+# source(
+#   "https://raw.githubusercontent.com/Dershan219/textile-dashboard/master/capstone_layout.R",
+#   local = F
+# )
+# source(
+#   "https://raw.githubusercontent.com/Dershan219/textile-dashboard/master/capstone_func.R",
+#   local = F
+# )
+setwd("C://Users/Andy/Desktop/NTU Courses/Capstone/dashboard")
+source("capstone_layout.R", local = T)
+source("capstone_func.R", local = T)
 
 # ecommerce_data---------------------------------------------------------------------------------------------------------
 men_data_amazon <-
@@ -326,44 +329,41 @@ server <- function(input, output) {
   })
   
   # supply & demand--------------------------------------------------------------------------------------------------------
-  output$nylon_bar <- renderPlotly({
-    ggplotly(plot_supply_bar('Nylon'), tooltip = c('text')) %>%
-      layout(
-        plot_bgcolor = 'rgba(0, 0, 0, 0)',
-        paper_bgcolor = 'rgba(0, 0, 0, 0)',
-        hoverlabel = list(font = list(size = 12))
-      ) %>%
-      config(displayModeBar = FALSE)
-  })
-  
-  output$polyester_bar <- renderPlotly({
-    ggplotly(plot_supply_bar('Polyester'), tooltip = c('text')) %>%
-      layout(
-        plot_bgcolor = 'rgba(0, 0, 0, 0)',
-        paper_bgcolor = 'rgba(0, 0, 0, 0)',
-        hoverlabel = list(font = list(size = 12))
-      ) %>%
-      config(displayModeBar = FALSE)
-  })
-  
-  output$others_bar <- renderPlotly({
-    ggplotly(plot_supply_bar('Others'), tooltip = c('text')) %>%
-      layout(
-        plot_bgcolor = 'rgba(0, 0, 0, 0)',
-        paper_bgcolor = 'rgba(0, 0, 0, 0)',
-        hoverlabel = list(font = list(size = 12))
-      ) %>%
-      config(displayModeBar = FALSE)
-  })
-  
-  output$trade_map <- renderLeaflet({
-    leaflet() %>% addProviderTiles("CartoDB.Positron") %>%
-      setView(110, 23, zoom = 3)
-  })
-  
-  output$tumblr_post <- renderUI({
-    a(href = "https://ibemini.tumblr.com/post/615177843943587840/to-order-it-click-here")
-  })
+  # output$nylon_bar <- renderPlotly({
+  #   ggplotly(plot_supply_bar('Nylon'), tooltip = c('text')) %>%
+  #     layout(
+  #       plot_bgcolor = 'rgba(0, 0, 0, 0)',
+  #       paper_bgcolor = 'rgba(0, 0, 0, 0)',
+  #       hoverlabel = list(font = list(size = 12))
+  #     ) %>%
+  #     config(displayModeBar = FALSE)
+  # })
+  # 
+  # output$polyester_bar <- renderPlotly({
+  #   ggplotly(plot_supply_bar('Polyester'), tooltip = c('text')) %>%
+  #     layout(
+  #       plot_bgcolor = 'rgba(0, 0, 0, 0)',
+  #       paper_bgcolor = 'rgba(0, 0, 0, 0)',
+  #       hoverlabel = list(font = list(size = 12))
+  #     ) %>%
+  #     config(displayModeBar = FALSE)
+  # })
+  # 
+  # output$others_bar <- renderPlotly({
+  #   ggplotly(plot_supply_bar('Others'), tooltip = c('text')) %>%
+  #     layout(
+  #       plot_bgcolor = 'rgba(0, 0, 0, 0)',
+  #       paper_bgcolor = 'rgba(0, 0, 0, 0)',
+  #       hoverlabel = list(font = list(size = 12))
+  #     ) %>%
+  #     config(displayModeBar = FALSE)
+  # })
+  # 
+  # output$trade_map <- renderLeaflet({
+  #   leaflet() %>% addProviderTiles("CartoDB.Positron") %>%
+  #     setView(110, 23, zoom = 3)
+  # })
+  # 
 }
 
 shinyApp(ui = ui, server = server)

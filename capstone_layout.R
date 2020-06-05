@@ -1,7 +1,9 @@
 library(shinycssloaders)
 
+Sys.setlocale(category = "LC_ALL", locale = "cht")
+
 header <- dashboardHeader(
-  title = "Textile Trends",
+  title = "Capstone Project",
   titleWidth = 180,
   dropdownMenu(
     type = 'messages',
@@ -25,7 +27,11 @@ sidebar <-
     sidebarMenu(
       id = "sidebar",
       menuItem(
-        text = "Amazon Trends",
+        text = "初期嘗試",
+        tabName = "slide1",
+        icon = icon("shopping-cart")),
+      menuItem(
+        text = "市場趨勢",
         tabName = "dashboard1",
         icon = icon("shopping-cart")
       ),
@@ -46,7 +52,7 @@ sidebar <-
         )
       ),
       menuItem(
-        text = "Brand Trends",
+        text = "品牌趨勢",
         tabName = "dashboard2",
         icon = icon("chart-line")
       ),
@@ -90,17 +96,17 @@ sidebar <-
         ))
       ),
       menuItem(
-        text = "Supply & Prices",
+        text = "目標校正",
         tabName = "dashboard3",
         icon = icon("globe-americas")
       ),
       menuItem(
-        text = "Competitor Trends",
+        text = "WEAVA媒合平台",
         tabName = "dashboard4",
         icon = icon("rss-square")
       ),
       menuItem(
-        text = "Our Reports",
+        text = "未來展望",
         tabName = "dashboard5",
         icon = icon("clipboard")
       ),
@@ -114,6 +120,13 @@ sidebar <-
 
 body <-
   dashboardBody(tabItems(
+    tabItem(
+      tabName = "slide1",
+      tabBox(
+        width=12,
+        tabPanel("布廠目前經營問題"),
+        tabPanel("初步構想"))
+    ),
     tabItem(
       tabName = "dashboard1",
       fluidRow(
@@ -160,33 +173,42 @@ body <-
               shinycssloaders::withSpinner(plotlyOutput("brand_trend", height = "310px"))
             ))),
     tabItem(tabName = "dashboard3",
-            fluidRow(
-              column(width = 4, align = "center",
-                     bsButton('nylon', "Nylon", style = 'primary', type = 'toggle', size = 'large'),
-                     conditionalPanel('input.nylon != 0',
-                                      plotlyOutput("nylon_bar", height = "300px"))),
-              column(width = 4, align = "center",
-                     bsButton('polyester', "Polyester", style = 'primary', type = 'toggle', size = 'large'),
-                     conditionalPanel('input.polyester != 0',
-                                      plotlyOutput("polyester_bar", height = "300px"))),
-              column(width = 4, align = "center",
-                     bsButton('others', "Others", style = 'primary', type = 'toggle', size = 'large'),
-                     conditionalPanel('input.others != 0',
-                                      plotlyOutput("others_bar", height = "300px")))),
-            br(),
-            fluidRow(column(
-              width = 12,
-              shinycssloaders::withSpinner(
-                leafletOutput("trade_map", height = "300px"),
-                type = 6,
-                size = 0.6
-              )
-            ))),
+            # ,fluidRow(
+            #   column(width = 4, align = "center",
+            #          bsButton('nylon', "Nylon", style = 'primary', type = 'toggle', size = 'large'),
+            #          conditionalPanel('input.nylon != 0',
+            #                           plotlyOutput("nylon_bar", height = "300px"))),
+            #   column(width = 4, align = "center",
+            #          bsButton('polyester', "Polyester", style = 'primary', type = 'toggle', size = 'large'),
+            #          conditionalPanel('input.polyester != 0',
+            #                           plotlyOutput("polyester_bar", height = "300px"))),
+            #   column(width = 4, align = "center",
+            #          bsButton('others', "Others", style = 'primary', type = 'toggle', size = 'large'),
+            #          conditionalPanel('input.others != 0',
+            #                           plotlyOutput("others_bar", height = "300px")))),
+            # br(),
+            # fluidRow(column(
+            #   width = 12,
+            #   shinycssloaders::withSpinner(
+            #     leafletOutput("trade_map", height = "300px"),
+            #     type = 6,
+            #     size = 0.6
+            #   )
+            # ))
+            tabBox(
+              width=12,
+              tabPanel("問題與發現"),
+              tabPanel("驗證假設"),
+              tabPanel("行動方案"))
+            ),
     tabItem(tabName = "dashboard4",
-            fluidRow(column(
-              width = 12, h4("Keep track of competitors' textile development"),
-              uiOutput("tumblr_post")
-            ))),
+            tabBox(
+              width=12,
+              tabPanel("平台功能"),
+              tabPanel("品牌方使用歷程"),
+              tabPanel("廠商使用歷程"),
+              tabPanel("設計師使用歷程"))
+            ),
     tabItem(
       tabName = "dashboard5",
       fluidRow(column(width = 12, h4(
